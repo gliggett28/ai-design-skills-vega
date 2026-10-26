@@ -1,6 +1,6 @@
 ---
-name: design-to-motion
-description: "Turns a static design (a Figma frame, dashboard, card set, app screen, or a UI on a photo background) into a pixel exact HTML replica that loads in from an empty state, then has every visual act out what it does (a chart being read, a list receiving items, a prompt being typed) in a seamless loop, and exports an MP4 for X, a website GIF, and an 800×500 GIF. Use this skill whenever the user asks to animate a design, a Figma link, a screenshot, UI cards, a dashboard, or a hero image, to make a loading or appear animation, a showcase loop, a motion mockup, or a video or GIF of a design, even when they only say \"animate this\". Also use it on landing pages and websites for bento and feature cards that pair text with a visual, and for product or dashboard mockups. Always consult it before exporting layers, choosing what moves, building the intro, writing the visual story loops, or encoding video and GIFs."
+name: vega-design-to-motion
+description: "VegaShares ETFs version of design-to-motion. Turns a static design (a Figma frame, dashboard, card set, app screen, or a UI on a photo background) into a pixel exact HTML replica that loads in from an empty state, then has every visual act out what it does (a chart being read, a list receiving items, a prompt being typed) in a seamless loop, and exports an MP4 for X, a website GIF, and an 800×500 GIF. Use this skill whenever the user asks to animate a design, a Figma link, a screenshot, UI cards, a dashboard, or a hero image, to make a loading or appear animation, a showcase loop, a motion mockup, or a video or GIF of a design, even when they only say \"animate this\". Also use it on landing pages and websites for bento and feature cards that pair text with a visual, and for product or dashboard mockups. Always consult it before exporting layers, choosing what moves, building the intro, writing the visual story loops, or encoding video and GIFs. Covers VegaShares fund graphics, Canva exports, and site sections, using the VegaShares brand (Poppins, Vega Blue #0055FF, Deep Navy #0A0E27) and ETF marketing guardrails. Not for non-VegaShares projects."
 ---
 
 # Design to Motion
@@ -15,7 +15,20 @@ This skill has three parts. **Part A** rebuilds the design so the finished frame
 
 Apply to any request to animate a static design: Figma frames, UI cards, dashboards, app screens, marketing heroes, product mockups, and designs placed on a photo background. When a rule here conflicts with a framework default, this file wins. When the user's explicit prompt conflicts with a rule, the user wins.
 
-**Not for** interaction motion inside a shipping product (hovers, menus, toasts). For that, use a product motion skill such as [emilkowalski/skills](https://github.com/emilkowalski/skills). **Companion skill:** `landing-page-design` in this repo, when the animation will live on a landing page.
+**Not for** interaction motion inside a shipping product (hovers, menus, toasts). For that, use a product motion skill such as [emilkowalski/skills](https://github.com/emilkowalski/skills). **Companion skill:** `vega-landing-page-design` in this repo, when the animation will live on a VegaShares page; its brand block is the source for every color, font, and logo rule.
+
+## VegaShares rules
+
+These sit on top of everything below.
+
+- **The source design wins on fidelity.** Never recolor or restyle an approved design to "fix" it. The brand rules apply to anything you add: helpers, cursors, pulses, tooltips, counters, padding, and backgrounds you have to invent.
+- **Added elements use the brand palette:** Vega Blue `#0055FF` for pulses, cursors, scrubbers, and highlights; Deep Navy `#0A0E27` or Slate Navy `#151932` for dark fills; White, Light Gray `#F8F9FA`, and Medium Gray `#666666` otherwise. No other colors, no gradients.
+- **Live text** (website context, counters) is Poppins at the design's weight and size; Geist Mono only where the design already uses a monospace.
+- **Numbers never change meaning.** Counters and chart stories count up to, and rest on, the exact figure in the approved design. Never animate a number past it, never show a value that is not in the design, and never imply a trend the data does not show (a chart may redraw, but not rise higher than its real values).
+- **Disclosures and fine print never move,** never fade out during stories, and stay legible in every export, including the 800×500 GIF. If fine print becomes unreadable at a small export size, say so and ask before cropping it.
+- **The logo is never animated apart from the design,** never redrawn, and keeps its clear space.
+- **Canva designs** count as a flat image source (A2): export the page from Canva as PNG at the largest size available, plus any element you can export on its own, and tell the user which parts cannot be separated.
+- **Exports are drafts.** Any animation that will be posted or published is marketing material and goes through compliance review first. Save working files under the project's `OUTPUTS\<project name>\` folder, never in Downloads.
 
 ## Two contexts
 
@@ -41,7 +54,7 @@ Scan the page section by section. Apply this skill only where a section has a vi
 | Bento and feature sections: cards with text plus a visual (a chart, list, flow, calendar, prompt, player) | Card intro on scroll (B2, `card` kind, text included), then a story loop on each card's visual (B4). This is the main use on a landing page |
 | Product or dashboard mockup (a hero shot of the app, a product screenshot) | The loading intro on scroll: surfaces stay, contents load (A5). Then **ask the user** whether they also want stories after loading. Do not add them unasked |
 | Logo rows, integrations | A marquee or a gentle light up story |
-| Text only sections: headline blocks, testimonials, FAQ, pricing, CTA, footer | Not this skill. Use the page's normal scroll reveal (for example `landing-page-design` B7) |
+| Text only sections: headline blocks, testimonials, FAQ, pricing, CTA, footer | Not this skill. Use the page's normal scroll reveal (for example `vega-landing-page-design` B7) |
 
 Website rules:
 
@@ -64,7 +77,7 @@ Gather these before building. Ask only for what is missing, and ask in one batch
 - **Layout.** Decide it yourself from the tree (A5): an **app frame** (a dashboard or app screen built from joined surfaces, such as a sidebar and a body) or **separate cards** (a bento grid, a card set, widgets). The two load differently.
 - **Background.** Is there a photo or texture behind the UI? Assume it must stay exactly as designed.
 - **Visuals.** Which parts are visuals that should act out a story after load (B4)? Assume every chart, list, stack, calendar, flow, prompt, photo, media control, and status indicator.
-- **Deliverables.** Showcase: default to all three, MP4 for X, website GIF, 800×500 GIF. Website: the animated sections in the site's code, with exports only when asked.
+- **Deliverables.** Showcase: default to all three, MP4 for X, website GIF, 800×500 GIF. For VegaShares social posts, also offer the square 1080×1080 MP4 for Instagram and LinkedIn (C2). Website: the animated sections in the site's code, with exports only when asked.
 - **Camera.** Assume no zoom and no pan (B7).
 
 If the user cannot answer, make a reasonable assumption, state it in one line, and continue. On the first design of a session, show the live page before recording exports, so the direction can be corrected cheaply.
@@ -398,6 +411,7 @@ On the page side, in `?capture`:
 |---|---|
 | `<name>-x.mp4` | H.264, `yuv420p`, 60fps, CRF 14–15, preset slow, `+faststart`, max 1920×1200, even dimensions |
 | `<name>-loop.gif` | 960px wide, 15–20fps, about 2 to 3MB, for the website |
+| `<name>-1080.mp4` | When asked, or offered for social posts. 1080×1080 square for Instagram and LinkedIn, H.264, `yuv420p`, 30fps, CRF 18, `+faststart`. A square source is scaled to fit; a non square source is fit and padded with the page background colour (Deep Navy `#0A0E27` or White, whichever the design sits on), never cropped through text or disclosures |
 | `<name>-800x500.gif` | Always delivered. When the frame has wide empty borders (most card and bento frames), crop to the content with about 40px of margin at exactly 1.6:1. When the content fills the frame, fit it and pad with the page background colour. On a photo background, always crop, so no flat band sits beside the photo. 20fps, 12fps if heavy |
 
 ```bash
@@ -461,6 +475,11 @@ Every motion and export value lives here. Edit this section and the rest of the 
 | MP4 | 60fps, CRF 15, max 1920×1200 |
 | Website GIF | 960px wide, 20fps |
 | Small GIF | 800×500, 20fps |
+| Square social MP4 | 1080×1080, 30fps, CRF 18 |
+| Accent color for added helpers | Vega Blue `#0055FF` |
+| Dark fill / pad color | Deep Navy `#0A0E27` (Slate Navy `#151932` for raised surfaces) |
+| Light fill / pad color | White `#FFFFFF` (Light Gray `#F8F9FA` for subtle surfaces) |
+| Live text font | Poppins (Geist Mono only where the design already uses a monospace) |
 
 ---
 
@@ -500,11 +519,18 @@ Every motion and export value lives here. Edit this section and the rest of the 
 - [ ] `<name>-x.mp4`, `<name>-loop.gif`, `<name>-800x500.gif` delivered
 - [ ] Token never printed or committed
 
+**VegaShares**
+- [ ] Added helpers use the brand palette only, no gradients
+- [ ] Counters and charts rest on the exact approved figures, never past them
+- [ ] Disclosures and fine print stay still and legible in every export
+- [ ] Logo untouched with clear space
+- [ ] Files saved under OUTPUTS, flagged as drafts for compliance review
+
 ---
 
 # Credits
 
-Part of [ai-design-skills](https://github.com/elayadesign/ai-design-skills) by Elaya, MIT licensed.
+Adapted for VegaShares ETFs from `design-to-motion` in [ai-design-skills](https://github.com/elayadesign/ai-design-skills) by Elaya, MIT licensed.
 
 A few general motion rules were adapted, not copied, from these MIT licensed skill collections:
 
